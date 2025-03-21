@@ -1,6 +1,9 @@
 # Visual Studio 2015 user specific files
 .vs/
 
+# Rider files
+.ide
+
 # Compiled Object files
 *.slo
 *.lo
