@@ -14,6 +14,7 @@ AAuraPlayerController::AAuraPlayerController()
 void AAuraPlayerController::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+	CursorTrace();
 }
 
 void AAuraPlayerController::BeginPlay()
