@@ -36,8 +36,14 @@ void AAuraEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	InitAbilityActorInfo();
+}
+
+void AAuraEnemyCharacter::InitAbilityActorInfo()
+{
 	if (AbilitySystemComponent)
 	{
 		AbilitySystemComponent->InitAbilityActorInfo(this, this);
+		AbilitySystemComponent->AbilityActorInfoSet();
 	}
 }
