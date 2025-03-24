@@ -4,6 +4,7 @@
 #include "UI/WidgetController/OverlayWidgetController.h"
 
 #include "AttributeSet.h"
+#include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "AbilitySystem/AuraAttributeSet.h"
 
 void UOverlayWidgetController::BroadcastInitialValues()
@@ -30,6 +31,16 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 	AbilitySystemComponent->
 		GetGameplayAttributeValueChangeDelegate(AuraAttributeSet->GetMaxManaAttribute()).
 		AddUObject(this, &UOverlayWidgetController::MaxManaChanged);
+	UAuraAbilitySystemComponent* AuraASC = Cast<UAuraAbilitySystemComponent>(AbilitySystemComponent);
+	AuraASC->EffectAssetTags.AddLambda(
+		[this](const FGameplayTagContainer& AssetTags)
+		{
+			for (const FGameplayTag& Tag : AssetTags)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Tag: %s"), *Tag.ToString());
+			}
+		}
+	);
 }
 
 void UOverlayWidgetController::HealthChanged(const FOnAttributeChangeData& Data) const
