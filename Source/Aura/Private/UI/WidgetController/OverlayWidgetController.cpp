@@ -37,7 +37,7 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 		{
 			for (const FGameplayTag& Tag : AssetTags)
 			{
-				UE_LOG(LogTemp, Warning, TEXT("Tag: %s"), *Tag.ToString());
+				FUIWidgetRow* Row = GetDataTableRowByTag<FUIWidgetRow>(MessageTable, Tag);
 			}
 		}
 	);
