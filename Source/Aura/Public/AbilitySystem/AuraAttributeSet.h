@@ -49,6 +49,12 @@ struct FEffectProperties
 	ACharacter* TargetCharacter = nullptr;
 };
 
+// Unreal engine guideline says you should use a type for prefix in typedefs
+// In this case we use F, instead of T from TBaseStatis..., because it's not a template anymore
+// It's a pointer to a function the returns Struct(F).
+// Note: TBaseStatic... can be replaced with FGameplayAttribute(*)();
+using FAttrFuncPointer = TBaseStaticDelegateInstance<FGameplayAttribute(), FDefaultDelegateUserPolicy>::FFuncPtr;
+
 /**
  * 
  */
@@ -109,6 +115,11 @@ public:
 
 	UFUNCTION()
 	void OnRep_ManaRegen(const FGameplayAttributeData& OldManaRegen) const;
+	
+	// Is a function pointer to a function that returns a FGameplayAttribute
+	// Used to map a GameplayTag to an attribute
+	// TMap<FGameplayTag, FAttrFuncPointer> TagsToAttribute;
+	TMap<FGameplayTag, FGameplayAttribute> TagsToAttribute;
 
 	/* Primary Attributes */
 	UPROPERTY(ReplicatedUsing=OnRep_Strength, BlueprintReadOnly, Category="Attributes|Primary")
